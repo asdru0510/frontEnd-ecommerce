@@ -1,4 +1,7 @@
 const moneda="USD"
+
+let buttons=document.querySelectorAll(".filter-button"); //Seleccionamos todos los filtros
+
 //Objeto que contiene los productos del catalogo
 let catalog={
     data:[{
@@ -43,9 +46,7 @@ for (let i of catalog.data){
 
     let card=document.createElement("div"); //Creamos el div con id "card" 
     card.setAttribute("id",i.productName);
-    card.classList.add("card",i.category);
-
-    //,"hide"    
+    card.classList.add("card",i.category,"hide");
 
     //Crear un container para la imgen de la tarjeta
 
@@ -86,10 +87,10 @@ for (let i of catalog.data){
     //Input de compra
 
     let qtyOrder=document.createElement("input");
-    order.setAttribute("type","number");
-    order.setAttribute("min",'1');
-    order.setAttribute("max",i.inventory);
-    order.value="1";
+    qtyOrder.setAttribute("type","number");
+    qtyOrder.setAttribute("min",'1');
+    qtyOrder.setAttribute("max",i.inventory);
+    qtyOrder.value="1";
     container.appendChild(qtyOrder);
 
     //Boton de compra
@@ -105,3 +106,38 @@ for (let i of catalog.data){
     document.getElementById("catalog").appendChild(card);
 }
 
+function filterProduct(value){
+buttons.forEach((button)=>{//iteramos en los botones de filtro
+    if(value.toUpperCase()==button.innerText.toUpperCase()){ //Pasamos el valor del agumento y el innerText del button por upperCase
+        button.classList.add("active");
+    }else{
+        button.classList.remove("active");
+    }
+})
+
+let elements=document.querySelectorAll(".card"); //Seleccionamos todas las tarjetas
+elements.forEach((element)=> {
+    if(value=="Todos"){  //sí esta seleccionado el filtro todos quitar el hide a todas las tarjetas 
+        element.classList.remove("hide");  
+    }else{
+        if(element.classList.contains(value)){ //sí esta seleccionado el filtro "x" quitar el hide a todas las tarjetas que coincidan con este filtro "x" en su categoria que esta en las clases del html
+            element.classList.remove("hide");
+        }else{
+            element.classList.add("hide");
+        }
+    }
+})
+}
+
+//Al cargar la página por defecto mostrar todos los productos
+window.onload=()=>{
+    filterProduct("Todos");
+}
+
+//Colocamos un listener a los buttons para filtrar al hacer click
+buttons.forEach(button=>{
+    button.addEventListener("click",function(){
+        let value=this.innerText
+        filterProduct(value)
+    })
+})

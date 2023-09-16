@@ -9,6 +9,38 @@
   body {
     background-color: #98c1d9;
   }
+  .nav-bar{
+    display: inline;
+    width: 100%;
+    position:fixed
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #3d5a80;
+    max-height: 45px;
+   }
+   li {
+    float: left;
+   }
+   li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+   }
+   li a:hover:not(.active) {
+    background-color: #98c1d9;
+    color: #3d5a80;
+   }
+   .active {
+    background-color: #5cc5f6;
+   }
+
   hr {
     display: block;
     margin-top: 1.2em;
@@ -37,9 +69,11 @@
     clear: both;
   }
   .container {
+    
     width: 90%;
     margin: 0 auto;
   }
+
   div.cart {
     max-width: 400px;
     width: 95%;
@@ -53,6 +87,7 @@
   }
   .search-container {
     margin: 1em 0;
+    margin-top: 50px;
   }
   .search-container input {
     background-color: transparent;
@@ -85,6 +120,12 @@
     color: #3d5a80;
     cursor: pointer;
   }
+
+  .filter-button:hover {
+    background-color: #77a1b9;
+    border:solid 2px #fff
+  }
+
   .catalog-button {
     padding: 0.6em 1em;
     margin: 0.6em;
